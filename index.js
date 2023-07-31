@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const connectDb = require("./db/connectDb");
 const errorHandler = require('./middleware/errorHandler');
+const path = require('path')
 
 //Middleware methods request
 app.use(cors({
@@ -16,6 +17,8 @@ app.use(cors({
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
+const _dirname = path.dirname("")
+const buildPath = path.join(_dirname, "../client/build");
 app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 app.use(errorHandler);
 
@@ -23,6 +26,7 @@ app.use(errorHandler);
 require('dotenv/config');
 const port = process.env.PORT;
 const api = process.env.API_URL;
+
 
 //Router imports
 const productRoutes= require("./routes/product");
